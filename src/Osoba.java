@@ -14,7 +14,7 @@ public class Osoba extends Pasazer{
     public List<Bilet> zwroc_bilety(){
         return bilety;
     }
-    public void kup_bilet(Trasa t, Samolot s,){
 
-    }
+
+
 }

@@ -1,13 +1,13 @@
 import java.util.LinkedList;
 import java.util.List;
 
-public class System {
+public class Sys {
     public List<Samolot> lista_s;
     public List<Trasa> lista_t;
     public List<Lotnisko> lista_l;
     public List<Pasazer> lista_p;
 
-    public System(){
+    public Sys(){
         this.lista_l = new LinkedList<>();
         this.lista_s = new LinkedList<>();
         this.lista_t = new LinkedList<>();
@@ -15,6 +15,12 @@ public class System {
     }
     public void dodaj_samolot(Samolot s){
         lista_s.add(s);
+    }
+    public void dodaj_trase(Trasa t){
+        lista_t.add(t);
+    }
+    public void dodaj_lotnisko(Lotnisko l){
+        lista_l.add(l);
     }
 
 }
