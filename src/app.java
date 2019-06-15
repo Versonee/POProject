@@ -4,43 +4,39 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.lang.Math;
-import com.sun.javafx.geom.Vec2d;
 
 public class app {
     //Funkcja wczytująca z pliku wszystkie dane do systemu : pasazerow, lotniska, samoloty i dostepne trasy.
-    public static void wczytajZPliku(List<Samolot> lista_s, List<Lotnisko> lista_l, List<Trasa> lista_t,List<Klient> lista_k) {
+    public static void wczytajZPliku(List<Samolot> lista_s, List<Lotnisko> lista_l, List<Trasa> lista_t, List<Klient> lista_k) {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("object.bin"));
             lista_s.addAll((List<Samolot>) inputStream.readObject());
             lista_t.addAll((List<Trasa>) inputStream.readObject());
             lista_l.addAll((List<Lotnisko>) inputStream.readObject());
             lista_k.addAll((List<Klient>) inputStream.readObject());
-        }
-        catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("FileNotFound");
             System.exit(-1);
-        }
-        catch(ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
 
             System.out.println("ClassNotFound");
             System.exit(-1);
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             System.out.println("IOException");
             System.exit(-1);
         }
     }
+
     //Funkcja zapisująca do pliku wszystkie dane z systemu : pasazerow, lotniska, samoloty i dostepne trasy.
-    public static void zapiszDoPliku(List<Samolot> lista_s, List<Lotnisko> lista_l, List<Trasa> lista_t, List<Klient> lista_k){
+    public static void zapiszDoPliku(List<Samolot> lista_s, List<Lotnisko> lista_l, List<Trasa> lista_t, List<Klient> lista_k) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("object.bin"))) {
             outputStream.writeObject(lista_s);
             outputStream.writeObject(lista_t);
             outputStream.writeObject(lista_l);
             outputStream.writeObject(lista_k);
 
-        }
-        catch(IOException e){
-            System.exit(- 1);
+        } catch (IOException e) {
+            System.exit(-1);
         }
     }
 
@@ -50,7 +46,7 @@ public class app {
         List<Trasa> lista_t = new LinkedList<>();
         List<Lotnisko> lista_l = new LinkedList<>();
         List<Klient> lista_k = new LinkedList<>();
-        wczytajZPliku(lista_s,lista_l,lista_t,lista_k);
+        wczytajZPliku(lista_s, lista_l, lista_t, lista_k);
         Scanner scan = new Scanner(System.in);
         String endl = System.getProperty("line.separator");
         int c;
@@ -64,7 +60,7 @@ public class app {
             scan.nextLine();
             switch (c) {
                 case 0: {
-                    zapiszDoPliku(lista_s,lista_l,lista_t,lista_k);
+                    zapiszDoPliku(lista_s, lista_l, lista_t, lista_k);
                     System.exit(0);
                 }
                 case 2: {
@@ -109,13 +105,13 @@ public class app {
                                 String nazwa = scan.nextLine();
                                 System.out.println("Podaj szerokosc geograficzna lotniska(x).");
                                 double x = 0;
-                                while(x <= 0 ) //polozenie nie byc ujemnie
+                                while (x <= 0) //polozenie nie byc ujemnie
                                 {
                                     x = scan.nextDouble();
                                 }
                                 System.out.println("Podaj wysokosc geograficzna lotniska(y).");
                                 double y = 0;
-                                while(y <= 0 ) //polozenie nie byc ujemnie
+                                while (y <= 0) //polozenie nie byc ujemnie
                                 {
                                     y = scan.nextDouble();
                                 }
@@ -159,9 +155,7 @@ public class app {
                                     break;
                                 }
                                 Lotnisko kon = lista_l.get(i - 1);
-                                Vec2d vec_start = start.Polozenie();
-                                Vec2d vec_koniec = kon.Polozenie();
-                                 double odl  = Math.sqrt(Math.pow(vec_start.x - vec_koniec.x, 2) + Math.pow(vec_start.y - vec_koniec.y, 2));
+                                double odl = Math.sqrt(Math.pow(start.X() - kon.X(), 2) + Math.pow(start.Y() - kon.Y(), 2));
                                 System.out.println("Wybierz samolot:");
                                 i = 0;
                                 List<Samolot> lista_s_pom = new LinkedList<>();
@@ -182,21 +176,20 @@ public class app {
                                 c_2 = 0;
                                 break;
                             }
-                            case 4:{
+                            case 4: {
                                 System.out.println("DODAWANIE KLIENTÓW DO SYSTEMU:");
                                 System.out.println("Podaj imię / nazwę firmy");
                                 String imie = scan.nextLine();
                                 System.out.println("Podaj nazwisko / ENTER w przypadku firmy");
                                 String nazw = scan.nextLine();
-                                if(nazw.equals("")) {
+                                if (nazw.equals("")) {
                                     Firma k = new Firma(imie);
                                     lista_k.add(k);
-                                }
-                                else {
+                                } else {
                                     Osoba k = new Osoba(imie, nazw);
                                     lista_k.add(k);
                                 }
-                                c_2=0;
+                                c_2 = 0;
                                 break;
 
                             }
@@ -255,11 +248,11 @@ public class app {
                                 c_2 = 0;
                                 break;
                             }
-                            case 4:{
+                            case 4: {
                                 int i = 1;
                                 System.out.println(endl + "KLIENCI");
                                 for (Klient k : lista_k) {
-                                    System.out.println(i + ". " + k.info()+" -> "+k.typ());
+                                    System.out.println(i + ". " + k.info() + " -> " + k.typ());
                                     i++;
                                 }
                                 System.out.println(endl);
@@ -362,9 +355,5 @@ public class app {
                     break;
             }
         }
-
     }
-
-
-
 }

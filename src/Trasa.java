@@ -1,5 +1,3 @@
-import com.sun.javafx.geom.Vec2d;
-
 import java.io.Serializable;
 import java.util.List;
 

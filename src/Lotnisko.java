@@ -1,5 +1,3 @@
-import com.sun.javafx.geom.Vec2d;
-
 import java.io.Serializable;
 
 public class Lotnisko implements Serializable {
@@ -17,10 +15,10 @@ public class Lotnisko implements Serializable {
     {
         return this.nazwa;
     }
-
-    public Vec2d Polozenie()
-    {
-        Vec2d vec = new Vec2d(x, y);
-        return vec;
+    public double X(){
+        return this.x;
+    }
+    public double Y(){
+        return this.y;
     }
 }
