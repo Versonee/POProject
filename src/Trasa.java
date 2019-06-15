@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.List;
 
-public class Trasa {
+public class Trasa implements Serializable {
     public Lotnisko start;
     public Lotnisko koniec;
     public int odleglosc;
