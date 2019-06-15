@@ -3,7 +3,8 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-
+import java.lang.Math;
+import com.sun.javafx.geom.Vec2d;
 
 public class app {
     //Funkcja wczytująca z pliku wszystkie dane do systemu : pasazerow, lotniska, samoloty i dostepne trasy.
@@ -106,7 +107,19 @@ public class app {
                                 System.out.println("DODAWANIE LOTNISKA DO SYSTEMU:");
                                 System.out.println("Podaj nazwę lotniska.");
                                 String nazwa = scan.nextLine();
-                                Lotnisko l = new Lotnisko(nazwa);
+                                System.out.println("Podaj szerokosc geograficzna lotniska(x).");
+                                double x = 0;
+                                while(x <= 0 ) //polozenie nie byc ujemnie
+                                {
+                                    x = scan.nextDouble();
+                                }
+                                System.out.println("Podaj wysokosc geograficzna lotniska(y).");
+                                double y = 0;
+                                while(y <= 0 ) //polozenie nie byc ujemnie
+                                {
+                                    y = scan.nextDouble();
+                                }
+                                Lotnisko l = new Lotnisko(nazwa, x, y);
                                 lista_l.add(l);
                                 System.out.println("POMYŚLNIE DODANO LOTNISKO DO SYSTEMU:");
                                 c_2 = 0;
@@ -146,13 +159,9 @@ public class app {
                                     break;
                                 }
                                 Lotnisko kon = lista_l.get(i - 1);
-                                System.out.println("Podaj odleglość między lotniskami:");
-                                int odl = scan.nextInt();
-                                scan.nextLine();
-                                if (odl < 0) {
-                                    System.out.println("BŁĄD. Odległość nie może być wartością mniejszą od 0");
-                                    break;
-                                }
+                                Vec2d vec_start = start.Polozenie();
+                                Vec2d vec_koniec = kon.Polozenie();
+                                 double odl  = Math.sqrt(Math.pow(vec_start.x - vec_koniec.x, 2) + Math.pow(vec_start.y - vec_koniec.y, 2));
                                 System.out.println("Wybierz samolot:");
                                 i = 0;
                                 List<Samolot> lista_s_pom = new LinkedList<>();
