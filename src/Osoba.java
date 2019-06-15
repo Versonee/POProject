@@ -13,17 +13,18 @@ public class Osoba extends Klient {
     public String info(){
         return imie+" "+nazwisko;
     }
+
     public List<Bilet> bilety(){
         return bilety;
     }
-<<<<<<< HEAD
-    public void kup_bilet(Trasa t, Samolot s)
-    {
 
-=======
+    public void kup_bilet(Trasa t, Samolot s) {
+
+    }
+
     public String typ(){
         return "osoba fizyczna";
->>>>>>> aba650f9a81dd420c98f7a39da106c4a4d100dff
+
     }
 
 
