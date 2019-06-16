@@ -55,6 +55,8 @@ public class app {
             System.out.println("1. Wyświetl");
             System.out.println("2. Dodaj");
             System.out.println("3. Usuń");
+            System.out.println("4. Zarządzanie biletami"); //to zostawiam wam
+            System.out.println("5. Update"); //po wybraniu tego program sprawdza które loty/ trasy sie juz odbyly i je usuwa
             System.out.println("0. Wyjdź");
             c = scan.nextInt();
             scan.nextLine();
@@ -139,6 +141,7 @@ public class app {
                                     break;
                                 }
                                 Lotnisko start = lista_l.get(i - 1);
+                                //lotnisko koncowe
                                 System.out.println("Podaj lotnisko koncowe");
                                 i = 0;
                                 for (Lotnisko l : lista_l) {
@@ -156,6 +159,7 @@ public class app {
                                 }
                                 Lotnisko kon = lista_l.get(i - 1);
                                 double odl = Math.sqrt(Math.pow(start.X() - kon.X(), 2) + Math.pow(start.Y() - kon.Y(), 2));
+                                //samolot
                                 System.out.println("Wybierz samolot:");
                                 i = 0;
                                 List<Samolot> lista_s_pom = new LinkedList<>();
@@ -169,9 +173,45 @@ public class app {
                                 }
                                 i = scan.nextInt();
                                 scan.nextLine();
+                                //data lotu
                                 LocalDate data = LocalDate.now();
+                                /* dokoncze to
+                                int d_day;
+                                int d_mon;
+                                int d_yr;
+                                boolean corr = false;
+                                while(!corr)
+                                {
+                                    System.out.println("Podaj rok lotu:");
+                                    d_day = scan.nextInt();
+                                    if(d_day >0 || d_day < )
+                                }
+                                */
                                 Samolot s = lista_s_pom.get(i - 1);
-                                Trasa t = new Trasa(start, kon, odl, s, data.toString());
+                                //numer lotu
+                                System.out.println("Nadaj numer lotu:");
+                                int nr = 0;
+                                boolean var = false;
+                                int counter;
+                                while(!var) {
+                                    nr = scan.nextInt();
+                                    counter = 0;
+                                    for (Trasa t : lista_t) {
+                                        if (nr != t.NumberLotu()) {
+                                            counter++;
+                                        }
+                                    }
+                                    if(counter == lista_t.toArray().length && nr > 0) {
+                                        var = true;
+                                        System.out.println("Nadano numer lotu");
+                                    }
+                                    else if(nr <= 0 )
+                                        System.out.println("Numer musi byc większy od 0");
+                                    else if(counter != lista_t.toArray().length)
+                                        System.out.println("Numer jest juz zajety");
+                                }
+
+                                Trasa t = new Trasa(start, kon, odl, s, data.toString(), nr);
                                 lista_t.add(t);
                                 c_2 = 0;
                                 break;
@@ -241,7 +281,7 @@ public class app {
                                 int i = 1;
                                 System.out.println(endl + "TRASY");
                                 for (Trasa t : lista_t) {
-                                    System.out.println(i + ". " + t.start.toString() + " -> " + t.koniec.toString() + "   data: " + t.data);
+                                    System.out.println(i + ". " + t.Start().toString() + " -> " + t.Koniec().toString() + "   data: " + t.Data());
                                     i++;
                                 }
                                 System.out.println(endl);
@@ -315,7 +355,7 @@ public class app {
                                 int i = 0;
                                 for (Trasa t : lista_t) {
                                     i++;
-                                    System.out.println(i + ". " + t.start + " -> " + t.koniec + "   data: " + t.data);
+                                    System.out.println(i + ". " + t.Start() + " -> " + t.Koniec() + "   data: " + t.Data());
                                 }
                                 i = scan.nextInt();
                                 scan.nextLine();
@@ -351,6 +391,16 @@ public class app {
                     }
                     break;
                 }
+
+                case 5:
+                {
+                    for(Trasa t : lista_t)
+                    {
+
+                    }
+                    break;
+                }
+
                 default:
                     break;
             }

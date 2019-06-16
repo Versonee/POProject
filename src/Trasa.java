@@ -24,6 +24,16 @@ public class Trasa implements Serializable {
             miejsca[i] = 0;
 
     }
+    //gettery
+    public Lotnisko Start()
+    {
+        return start;
+    }
+
+    public Lotnisko Koniec()
+    {
+        return koniec;
+    }
 
     public String Data()
     {
@@ -34,7 +44,7 @@ public class Trasa implements Serializable {
     {
         return numer_lotu;
     }
-
+    //
     //zwraca true jak sie udało zareerwowac wszystkie miejsca lub fail jak nie
     public boolean RezerwojMiejsceOsoba(Klient klient, int[]miejsca)
     {
@@ -58,7 +68,7 @@ public class Trasa implements Serializable {
     }
 
     //dokoncze
-    public void ZwolnijMiejsce(int nr)
+    public void ZwolnijMiejsce(Klient klient ,int nr)
     {
 
     }
