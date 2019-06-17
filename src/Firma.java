@@ -16,4 +16,9 @@ public class Firma extends Klient {
     public String typ(){
         return "firma";
     }
+    public int iloscBiletow(){
+        int i =0;
+        for (Bilet b : this.bilety) i++;
+        return i;
+    }
 }

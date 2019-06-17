@@ -30,10 +30,19 @@ public class Lot implements Serializable {
             return true;
         }
     }
+    public int zwrocId(){
+        return this.nrLotu;
+    }
     //funkjcja usuwa bilet dla danego klienta i zwlanie miejsce
     public void ZwrocBilet(Klient k, Bilet b)
     {
         miejsca[b.NumerMiejsca()] = 0;
         k.bilety().remove(b);
+    }
+    public String info(){
+        return this.trasa.Start()+" -> "+this.trasa.Koniec()+"   "+this.data;
+    }
+    public int[] getMiejsca(){
+        return miejsca;
     }
 }

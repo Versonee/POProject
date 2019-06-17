@@ -26,6 +26,11 @@ public class Osoba extends Klient {
         return "osoba fizyczna";
 
     }
+    public int iloscBiletow(){
+        int i =0;
+        for (Bilet b : this.bilety) i++;
+        return i;
+    }
 
 
 

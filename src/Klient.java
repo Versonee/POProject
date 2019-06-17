@@ -5,4 +5,5 @@ public abstract class Klient implements Serializable {
     abstract String info();
     abstract List<Bilet> bilety();
     abstract String typ();
+    abstract int iloscBiletow();
 }

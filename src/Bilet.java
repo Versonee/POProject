@@ -13,8 +13,7 @@ public class Bilet {
         return numer_miejsca;
     }
 
-    public int NumerLotu()
-    {
+    public int NumerLotu(){
         return numer_lotu;
     }
 
