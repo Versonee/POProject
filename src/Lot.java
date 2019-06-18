@@ -1,9 +1,9 @@
 import java.io.Serializable;
-import java.util.time;
+import java.time.LocalDate;
 public class Lot implements Serializable {
 
     private Trasa trasa;
-    private LocalTime data;
+    private LocalDate data;
     private int nrLotu;
     private int[] miejsca;
     public Lot(Trasa trasa, LocalDate data, int nr)
@@ -46,7 +46,7 @@ public class Lot implements Serializable {
         return miejsca;
     }
     // potrzebne do generowania przelotow 
-    public  DateTime kiedy() {
+    public LocalDate kiedy() {
     	return this.data;
     }
     public Trasa trasaLotu() {
