@@ -1,11 +1,13 @@
 import java.io.Serializable;
 import java.time.LocalDate;
+
 public class Lot implements Serializable {
 
     private Trasa trasa;
     private LocalDate data;
     private int nrLotu;
     private int[] miejsca;
+
     public Lot(Trasa trasa, LocalDate data, int nr)
     {
         this.trasa = trasa;
@@ -16,6 +18,7 @@ public class Lot implements Serializable {
         miejsca[i] = 0;
 
     }
+
     //funkjca zwraca true jezeli uda sie zzarezerwowac bilet i dodaje go do listy dla danego klienta
     public boolean KupBilet(Klient k, int miejsce)
     {
@@ -30,26 +33,29 @@ public class Lot implements Serializable {
             return true;
         }
     }
-    public int zwrocId(){
-        return this.nrLotu;
-    }
+
     //funkjcja usuwa bilet dla danego klienta i zwlanie miejsce
     public void ZwrocBilet(Klient k, Bilet b)
     {
         miejsca[b.NumerMiejsca()] = 0;
         k.bilety().remove(b);
     }
+
     public String info(){
-        return this.trasa.Start()+" -> "+this.trasa.Koniec()+"   "+this.data;
+        return this.trasa.Start() + " -> " + this.trasa.Koniec()+ "   " + this.data;
     }
-    public int[] getMiejsca(){
+    public int NrLotu(){
+        return this.nrLotu;
+    }
+    public int[] Miejsca(){
         return miejsca;
     }
+
     // potrzebne do generowania przelotow 
-    public LocalDate kiedy() {
+    public LocalDate Data() {
     	return this.data;
     }
-    public Trasa trasaLotu() {
+    public Trasa Trasa() {
     	return this.trasa;
     }
 }

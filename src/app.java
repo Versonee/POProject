@@ -5,16 +5,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.lang.Math;
-import java.util.time;
+import java.time.LocalDate;
+
+//Co zmieniłem(Kuba):
+// - konstruktor trasy pobiera takze date utwozrznia trasy(dzieki temu trasa bedzie wiedziec kiedy wygenerowac nowy lot)
+// - funkjca update po wybraniu z menu generuje nowe loty i powinna usuwac stare(to trzeba dokonczyc)
 
 //co trzeba zrobic:
-//odzielic maina
-//klase obslugujaca zapis/odczyt pliku
-// - !!!!!!!!!ZROBIONE!!!!!!!!!!!! dodac zapis i odzcyt lotow z pliku
-// - datetime tego nie załatwia? tzn trzeba to zmienic na local date ale nwm czy o to chodziło trzeba jakas zmienna co przechowuje date i ja modyfkikowac to bede mogl dokonczy generowanie lotow
-// - !!!!!!!!!ZROBIONE!!!!!!!!!!!!trzeba jakas zmienna co perzchowuje ilosc lotow, dzieki temu automatycznie bedzie ustalac nowe nr lotu a nie prosic  urzytkownika
-// - !!!!!!!!!ZROBIONE!!!!!!!!!!!!funkjce do kupowania i zwracania biloetow, jak beda problemy to rzaem cos ogarniemy
-//wlasna klasa wyjatkow
+// - dokonczyc funkcje update
+// - przetestowac czy sie nie zawiesza nigdzie
+// dac maina jako klase to oc mowil dzisaij na zajeciach
 
 public class app {
     //Funkcja wczytująca z pliku wszystkie dane do systemu : pasazerow, lotniska, samoloty, dostepne trasy, aktywne loty.
@@ -38,6 +38,7 @@ public class app {
             //System.exit(-1);
         }
     }
+    /*
   // byc moze generuje lot na podstawie skąd dokąd i kiedy ale nie wiem czy działa bo nie dziala mi kompilowanie na netbeans
     // do tej i nastepnej funkcji potrzebujemy jeszcze listy lotow
     LocalDate data= LocalDate.now();
@@ -96,6 +97,7 @@ public class app {
     		 }
     	}
     }
+    */
     //Funkcja zapisująca do pliku wszystkie dane z systemu : pasazerow, lotniska, samoloty i dostepne trasy.
     public static void zapiszDoPliku(List<Samolot> lista_s, List<Lotnisko> lista_l, List<Trasa> lista_t, List<Klient> lista_k, List<Lot> lista_lot) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("object.bin"))) {
@@ -110,12 +112,13 @@ public class app {
             System.exit(-1);
         }
     }
+
     //funkcja zwracająca kolejne wolne id lotu, jako parametr przyjmuje listę lotów, gdy nie ma żadnych lotów zwróci początkowe id czyli 1.
     public static int nextId(List<Lot> lista){
         int id_max=0;
         for(Lot l : lista)
         {
-            if (l.zwrocId()>id_max) id_max = l.zwrocId();
+            if (l.NrLotu() > id_max) id_max = l.NrLotu();
         }
         return id_max+1;
     }
@@ -275,7 +278,9 @@ public class app {
                                     else if(ile > 30)
                                         System.out.println("Maksymalna wartosc to 30 dni");
                                 }
-                                Trasa t = new Trasa(start, kon, odl, s, ile);
+                                //potrzabna aktulana data do poprawnego generowania lotow
+                                LocalDate data = LocalDate.now();
+                                Trasa t = new Trasa(start, kon, odl, s, ile, data);
                                 lista_t.add(t);
                                 c_2 = 0;
                                 break;
@@ -455,7 +460,7 @@ public class app {
                     }
                     break;
                 }
-                case 4:
+                case 4: // zarzadzanie biletami
                 {
                     System.out.println("Kim jesteś?");
                     int i=1;
@@ -514,11 +519,11 @@ public class app {
                                     }
                                 }
                                 Lot l = lista_lot.get(i-1);
-                                System.out.println("Wybrano lot o id: "+l.zwrocId());
+                                System.out.println("Wybrano lot o id: " + l.NrLotu());
                                 System.out.println("Dostępne miejsca w samolocie:");
                                 String miejsca = "";
                                 i=1;
-                                for(int n : l.getMiejsca()){
+                                for(int n : l.Miejsca()){
                                     if(n==1) miejsca+=n+" ";
                                     i++;
                                 }
@@ -545,9 +550,21 @@ public class app {
                     }
                     break;
                 }
-                case 5:
+                case 5: //update
                 {
-
+                    //dla kazdej trasy z listy towrzy nowy lot jezeli nadszedl czas(no wiadomo o co chodzi xD)
+                    LocalDate data= LocalDate.now();
+                    for(Trasa t : lista_t)
+                    {
+                        if(t.DataUtworzenia().plusDays(t.CoIle())  == data)
+                            lista_lot.add(t.NowyLot(data, nextId(lista_lot)));
+                    }
+                    //usuwanie lotow ktore juz sie odbyly
+                    for(Lot l : lista_lot)
+                    {
+                        //nie wiem jak proownoac dwie daty do siebie, jak ktos moz eto nie popatrzy
+                        //teoretycznie to powinno wygladac tak if data > l.data to usun l
+                    }
                     break;
                 }
 
