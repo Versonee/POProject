@@ -316,8 +316,9 @@ public class app {
                                 int i = 0;
                                 for (Trasa t : lista_t)
                                 {
-                                    System.out.println(i + ". " + t.Start().toString() + " -> " + t.Koniec().toString() + " Co " + t.CoIle() + " dni");
                                     i++;
+                                    System.out.println(i + ". " + t.Start().toString() + " -> " + t.Koniec().toString() + " Co " + t.CoIle() + " dni");
+
                                 }
                                 try
                                 {
@@ -538,7 +539,7 @@ public class app {
                             case 2: {
                                 System.out.println("KUPOWANIE BILETU:");
                                 System.out.println("Wybierz lot:"+endl);
-                                i=0;
+                                i=1;
                                 if(lista_lot.size()==0){
                                     System.out.println("Przepraszamy. Nie ma dostępnych lotów");
                                     c_2 = 0;
@@ -546,6 +547,7 @@ public class app {
                                 }
                                 for(Lot l : lista_lot){
                                     System.out.println(i+". "+l.info());
+                                    i++;
                                 }
                                 i=-1;
                                 while(i <0 || i>lista_lot.size())
@@ -564,7 +566,7 @@ public class app {
                                 String miejsca = "";
                                 i=1;
                                 for(int n : l.Miejsca()){
-                                    if(n==1) miejsca+=n+" ";
+                                    if(n==0) miejsca+=i+" ";
                                     i++;
                                 }
                                 System.out.println(miejsca+endl);
