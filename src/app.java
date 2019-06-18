@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.lang.Math;
-import java.util.Date;
+import java.util.time;
 
 //co trzeba zrobic:
 
@@ -38,10 +38,10 @@ public class app {
     }
   // byc moze generuje lot na podstawie skąd dokąd i kiedy ale nie wiem czy działa bo nie dziala mi kompilowanie na netbeans
     // do tej i nastepnej funkcji potrzebujemy jeszcze listy lotow
-    DateTime data = DateTime.Now();
+    LocalDate data= LocalDate.now();
     Lotnisko a= lista_l.get(1);
     Lotnisko b= lista_l.get(2)
-    public static void generujLot( Lotnisko a, Lotnisko b,  DateTime data)
+    public static void generujLot( Lotnisko a, Lotnisko b,  LocalDate data)
     {
     	int suma= new int;
     	suma=0;
@@ -84,11 +84,11 @@ public class app {
     	}
     }
     // usuwa przedawnione loty ? ale ten sam problem jak wyzej
-    public static void usunStaryLot(List<Lot>lista_lot,  DateTime data) {
+    public static void usunStaryLot(List<Lot>lista_lot,  LocalDate data) {
 
     	for(int i=0; i<lista_lot.size(); i++)
     	{
-    		 DateTime data2=lista_lot.get(i).kiedy();
+    		 LocalDate data2=lista_lot.get(i).kiedy();
     		 if((data2).compareTo(data) > 0) {
     			 lista_lot.remove();
     		 }
