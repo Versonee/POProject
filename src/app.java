@@ -553,17 +553,25 @@ public class app {
                 case 5: //update
                 {
                     //dla kazdej trasy z listy towrzy nowy lot jezeli nadszedl czas(no wiadomo o co chodzi xD)
+                    // + 7 więc z tygodniowym wyprzedzeniem
                     LocalDate data= LocalDate.now();
                     for(Trasa t : lista_t)
                     {
-                        if(t.DataUtworzenia().plusDays(t.CoIle())  == data)
+                        if(t.DataUtworzenia().plusDays(7) == data)
+                        {
                             lista_lot.add(t.NowyLot(data, nextId(lista_lot)));
+                            t.UstawDate(data.plusDays(t.CoIle()));
+                            System.out.println("Utworzono nowy lot na trasie:");
+                            System.out.println(t.Start().toString() + " -> " + t.Koniec().toString());
+                        }
+
                     }
                     //usuwanie lotow ktore juz sie odbyly
                     for(Lot l : lista_lot)
                     {
-                        //nie wiem jak proownoac dwie daty do siebie, jak ktos moz eto nie popatrzy
-                        //teoretycznie to powinno wygladac tak if data > l.data to usun l
+                        if(l.Data() == data)
+                            lista_lot.remove(l);
+
                     }
                     break;
                 }

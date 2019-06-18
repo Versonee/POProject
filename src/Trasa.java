@@ -38,8 +38,9 @@ public class Trasa implements Serializable {
 
     public LocalDate DataUtworzenia() { return data_utworzenia;}
 
+    public void UstawDate(LocalDate data) { data_utworzenia = data;}
+
     //funkcja zwracajaca nowo utworzony lot
-    //dokoncze
     public Lot NowyLot(LocalDate data, int numer)
     {
 
