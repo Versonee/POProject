@@ -1,5 +1,5 @@
 import java.io.Serializable;
-
+import java.util.Date;
 public class Lot implements Serializable {
 
     private Trasa trasa;
@@ -44,5 +44,12 @@ public class Lot implements Serializable {
     }
     public int[] getMiejsca(){
         return miejsca;
+    }
+    // potrzebne do generowania przelotow 
+    public  DateTime kiedy() {
+    	return this.data;
+    }
+    public Trasa trasaLotu() {
+    	return this.trasa;
     }
 }
