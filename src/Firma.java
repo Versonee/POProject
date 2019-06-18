@@ -1,11 +1,14 @@
+import java.util.LinkedList;
 import java.util.List;
 
 public class Firma extends Klient {
-    public String nazwa;
-    public List<Bilet> bilety;
+    private String nazwa;
+    private List<Bilet> bilety;
 
     public Firma(String nazwa){
+
         this.nazwa = nazwa;
+        this.bilety = new LinkedList<>();
     }
     public String info(){
         return nazwa;
@@ -17,8 +20,6 @@ public class Firma extends Klient {
         return "firma";
     }
     public int iloscBiletow(){
-        int i =0;
-        for (Bilet b : this.bilety) i++;
-        return i;
+        return bilety.size();
     }
 }

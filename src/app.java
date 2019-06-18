@@ -8,11 +8,13 @@ import java.lang.Math;
 import java.util.Date;
 
 //co trzeba zrobic:
-
+//odzielic maina
+//klase obslugujaca zapis/odczyt pliku
 // - !!!!!!!!!ZROBIONE!!!!!!!!!!!! dodac zapis i odzcyt lotow z pliku
 // - trzeba jakas zmienna co przechowuje date i ja modyfkikowac to bede mogl dokonczy generowanie lotow
 // - !!!!!!!!!ZROBIONE!!!!!!!!!!!!trzeba jakas zmienna co perzchowuje ilosc lotow, dzieki temu automatycznie bedzie ustalac nowe nr lotu a nie prosic  urzytkownika
 // - !!!!!!!!!ZROBIONE!!!!!!!!!!!!funkjce do kupowania i zwracania biloetow, jak beda problemy to rzaem cos ogarniemy
+//wlasna klasa wyjatkow
 
 public class app {
     //Funkcja wczytująca z pliku wszystkie dane do systemu : pasazerow, lotniska, samoloty, dostepne trasy, aktywne loty.
@@ -38,9 +40,10 @@ public class app {
     }
   // byc moze generuje lot na podstawie skąd dokąd i kiedy ale nie wiem czy działa bo nie dziala mi kompilowanie na netbeans
     // do tej i nastepnej funkcji potrzebujemy jeszcze listy lotow
+    /*
     DateTime data = DateTime.Now();
     Lotnisko a= lista_l.get(1);
-    Lotnisko b= lista_l.get(2)
+    Lotnisko b= lista_l.get(2);
     public static void generujLot( Lotnisko a, Lotnisko b,  DateTime data)
     {
     	int suma= new int;
@@ -94,6 +97,7 @@ public class app {
     		 }
     	}
     }
+    */
     //Funkcja zapisująca do pliku wszystkie dane z systemu : pasazerow, lotniska, samoloty i dostepne trasy.
     public static void zapiszDoPliku(List<Samolot> lista_s, List<Lotnisko> lista_l, List<Trasa> lista_t, List<Klient> lista_k, List<Lot> lista_lot) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("object.bin"))) {
@@ -354,7 +358,7 @@ public class app {
                                 int i = 1;
                                 System.out.println(endl + "KLIENCI");
                                 for (Klient k : lista_k) {
-                                    System.out.println(i + ". " + k.info() + " -> " + k.typ()+" liczba biletów: "+k.iloscBiletow());
+                                    System.out.println(i + ". " + k.info() + " -> " + k.typ()+" |  liczba biletów: "+k.iloscBiletow());
                                     i++;
                                 }
                                 System.out.println(endl);

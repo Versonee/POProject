@@ -46,9 +46,10 @@ public class Lot implements Serializable {
         return miejsca;
     }
     // potrzebne do generowania przelotow 
-    public  DateTime kiedy() {
+    /*public  DateTime kiedy() {
     	return this.data;
     }
+    */
     public Trasa trasaLotu() {
     	return this.trasa;
     }
