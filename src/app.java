@@ -10,7 +10,7 @@ import java.util.Date;
 //co trzeba zrobic:
 
 // - !!!!!!!!!ZROBIONE!!!!!!!!!!!! dodac zapis i odzcyt lotow z pliku
-// - trzeba jakas zmienna co przechowuje date i ja modyfkikowac to bede mogl dokonczy generowanie lotow
+// - datetime tego nie załatwia? tzn trzeba to zmienic na local date ale nwm czy o to chodziło trzeba jakas zmienna co przechowuje date i ja modyfkikowac to bede mogl dokonczy generowanie lotow
 // - !!!!!!!!!ZROBIONE!!!!!!!!!!!!trzeba jakas zmienna co perzchowuje ilosc lotow, dzieki temu automatycznie bedzie ustalac nowe nr lotu a nie prosic  urzytkownika
 // - !!!!!!!!!ZROBIONE!!!!!!!!!!!!funkjce do kupowania i zwracania biloetow, jak beda problemy to rzaem cos ogarniemy
 
