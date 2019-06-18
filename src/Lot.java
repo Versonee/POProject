@@ -1,12 +1,12 @@
 import java.io.Serializable;
-import java.util.Date;
+import java.util.time;
 public class Lot implements Serializable {
 
     private Trasa trasa;
-    private String data;
+    private LocalTime data;
     private int nrLotu;
     private int[] miejsca;
-    public Lot(Trasa trasa, String data, int nr)
+    public Lot(Trasa trasa, LocalDate data, int nr)
     {
         this.trasa = trasa;
         this.data = data;
