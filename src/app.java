@@ -7,15 +7,6 @@ import java.util.Scanner;
 import java.lang.Math;
 import java.time.LocalDate;
 
-//Co zmieniłem(Kuba):
-// - konstruktor trasy pobiera takze date utwozrznia trasy(dzieki temu trasa bedzie wiedziec kiedy wygenerowac nowy lot)
-// - funkjca update po wybraniu z menu generuje nowe loty i powinna usuwac stare(to trzeba dokonczyc)
-
-//co trzeba zrobic:
-// - dokonczyc funkcje update
-// - przetestowac czy sie nie zawiesza nigdzie
-// dac maina jako klase to oc mowil dzisaij na zajeciach
-
 public class app {
     //Funkcja wczytująca z pliku wszystkie dane do systemu : pasazerow, lotniska, samoloty, dostepne trasy, aktywne loty.
     public static void wczytajZPliku(List<Samolot> lista_s, List<Lotnisko> lista_l, List<Trasa> lista_t, List<Klient> lista_k, List<Lot> lista_lot) throws MyException {
@@ -42,66 +33,6 @@ public class app {
             System.out.println(e.getMessage());
         }
     }
-    /*
-  // byc moze generuje lot na podstawie skąd dokąd i kiedy ale nie wiem czy działa bo nie dziala mi kompilowanie na netbeans
-    // do tej i nastepnej funkcji potrzebujemy jeszcze listy lotow
-    LocalDate data= LocalDate.now();
-    Lotnisko a= lista_l.get(1);
-    Lotnisko b= lista_l.get(2)
-    public static void generujLot( Lotnisko a, Lotnisko b,  LocalDate data)
-    {
-    	int suma= new int;
-    	suma=0;
-    	//wyszukuje bezposrednie polaczenia
-    	for(int i=0; i<lista_t.size(); i++) {
-    		if(lista_t.get(i).Start==a && lista_t.get(i).Koniec==b ) {
-    			Trasa zgodna = lista_t.get(i);
-    			for(int j=0; j<lista_lot.size(); j++) {
-    				if(lista_lot.get(j).trasaLotu()== zgodna && lista_lot.get(j).kiedy()==data )
-    				{
-    					suma++;
-    					// Ta trasa sie nadaje ale nie wiem co zrobic z tym faktem
-    					break;
-
-    				}
-    			}
-
-    		}
-    	}
-    	// jesli nie ma bezposredniego znajdzie z przesiadka
-    	if(suma == 0) {
-    		for(int i=0; i<lista_lot.size(); i++) {
-        		if(lista_lot.get(i).trasaLotu.Start==a && lista_lot.get(i).kiedy()==data ) {
-        			for(int j=0; j<lista_t.size(); j++) {
-        	    		if(lista_lot.get(j).trasaLotu.Start==lista_lot.get(i).trasaLotu.Koniec && lista_lot.get(j).trasaLotu.Koniec==b && lista_lot.get(j).kiedy()==data) {
-        	    			//lista_lot.get(i) to pierwszy lot startujacy z wybranego puntu w danym dniu
-        	    			// lista_lot.get(j) to lot po przesiadce w tym samym dniu konczacy sie w wybranym punkcie
-        	    			//mozna to wypisac czy cokolwiek z tym zrobic
-        	    			suma++;
-        	    			break;
-        	    		}
-        		}
-    		}
-
-    	}
-    	}
-    	if(suma==0) {
-    		// brak mozliwosci takiego przelotu z jedna przesiadka lub bez
-    		}
-    	}
-    }
-    // usuwa przedawnione loty ? ale ten sam problem jak wyzej
-    public static void usunStaryLot(List<Lot>lista_lot,  LocalDate data) {
-
-    	for(int i=0; i<lista_lot.size(); i++)
-    	{
-    		 LocalDate data2=lista_lot.get(i).kiedy();
-    		 if((data2).compareTo(data) > 0) {
-    			 lista_lot.remove();
-    		 }
-    	}
-    }
-    */
 
     //Funkcja zapisująca do pliku wszystkie dane z systemu : pasazerow, lotniska, samoloty i dostepne trasy.
     public static void zapiszDoPliku(List<Samolot> lista_s, List<Lotnisko> lista_l, List<Trasa> lista_t, List<Klient> lista_k, List<Lot> lista_lot) {
@@ -573,7 +504,7 @@ public class app {
                                 System.out.println("Wybierz miejsce:");
                                 i = scan.nextInt();
                                 scan.nextLine();
-                                while(!l.KupBilet(k,i)){
+                                while(!l.KupBilet(k,i-1)){
                                     System.out.println("Cos poszło nie tak. Wybierz ponownie miejsce");
                                     i = scan.nextInt();
                                     scan.nextLine();
