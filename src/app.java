@@ -156,6 +156,7 @@ public class app {
                         System.out.println("2. Lotniska");
                         System.out.println("3. Trasy");
                         System.out.println("4. Klienci");
+                        System.out.println("5. Loty");
                         System.out.println("0. Wyjdź");
                         c_2 = scan.nextInt();
                         scan.nextLine();
@@ -301,6 +302,40 @@ public class app {
                                 c_2 = 0;
                                 break;
 
+                            }
+                            case 5:
+                            {
+                                System.out.println("Wybierz trase: ");
+                                //wybór trasy
+                                System.out.println(endl + "TRASY");
+                                int i = 0;
+                                for (Trasa t : lista_t)
+                                {
+                                    System.out.println(i + ". " + t.Start().toString() + " -> " + t.Koniec().toString() + " Co " + t.CoIle() + " dni");
+                                    i++;
+                                }
+                                try
+                                {
+                                    i = scan.nextInt();
+                                }
+                                catch (InputMismatchException e)
+                                {
+                                    System.out.println("Nieprwidłowy wybór");
+                                    scan.nextLine();
+                                }
+                                LocalDate data = LocalDate.now();
+                                Trasa tras;
+                                //wybór daty
+                                System.out.println("Wybierz date lotu:");
+                                System.out.println("(0 - dzisiejsza data) ");
+                                int d = scan.nextInt();
+                                if(d == 0)
+                                {
+                                    tras = lista_t.get(i - 1);
+                                    lista_lot.add(tras.NowyLot(data, nextId(lista_lot)));
+                                }
+
+                                break;
                             }
                             case 0: {
                                 c_2 = 0;
@@ -575,7 +610,6 @@ public class app {
                     }
                     break;
                 }
-
                 default:
                     break;
             }
