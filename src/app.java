@@ -18,7 +18,7 @@ import java.time.LocalDate;
 
 public class app {
     //Funkcja wczytująca z pliku wszystkie dane do systemu : pasazerow, lotniska, samoloty, dostepne trasy, aktywne loty.
-    public static void wczytajZPliku(List<Samolot> lista_s, List<Lotnisko> lista_l, List<Trasa> lista_t, List<Klient> lista_k, List<Lot> lista_lot) {
+    public static void wczytajZPliku(List<Samolot> lista_s, List<Lotnisko> lista_l, List<Trasa> lista_t, List<Klient> lista_k, List<Lot> lista_lot) throws MyException {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("object.bin"));
             lista_s.addAll((List<Samolot>) inputStream.readObject());
@@ -26,6 +26,7 @@ public class app {
             lista_l.addAll((List<Lotnisko>) inputStream.readObject());
             lista_k.addAll((List<Klient>) inputStream.readObject());
             lista_lot.addAll((List<Lot>) inputStream.readObject());
+            throw new MyException("Exception");
         } catch (FileNotFoundException e) {
             System.out.println("Nie znaleziono pliku, po prawidłowym zamknięciu programu plik zostanie utworzony automatycznie");
            // System.exit(-1);
@@ -36,6 +37,9 @@ public class app {
         } catch (IOException e) {
             System.out.println("IOException");
             //System.exit(-1);
+        }
+        catch (MyException e){
+            System.out.println(e.getMessage());
         }
     }
     /*
@@ -98,6 +102,7 @@ public class app {
     	}
     }
     */
+
     //Funkcja zapisująca do pliku wszystkie dane z systemu : pasazerow, lotniska, samoloty i dostepne trasy.
     public static void zapiszDoPliku(List<Samolot> lista_s, List<Lotnisko> lista_l, List<Trasa> lista_t, List<Klient> lista_k, List<Lot> lista_lot) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("object.bin"))) {
@@ -123,7 +128,7 @@ public class app {
         return id_max+1;
     }
     //Funkcja głowna. Odpowiedzialna jest za wiekszosc funkcjonalnosci systemu
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MyException {
         List<Samolot> lista_s = new LinkedList<>();
         List<Trasa> lista_t = new LinkedList<>();
         List<Lotnisko> lista_l = new LinkedList<>();
